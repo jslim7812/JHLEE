@@ -12,8 +12,9 @@ plusUrl = input('검색할 태그를 입력하세요 : ')
 url = baseUrl + quote_plus(plusUrl)
 
 #print(url)
-path = "c:/crawling/chromedriver.exe"
-driver = webdriver.Chrome(path)
+#path = "c:/crawling/chromedriver.exe"
+#driver = webdriver.Chrome(path)
+driver = webdriver.Chrome()
 driver.get(url)
 
 time.sleep(3)
