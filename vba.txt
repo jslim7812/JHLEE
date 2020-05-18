@@ -1,0 +1,35 @@
+Sub getScrAttributeImgTag()
+
+Dim ie As InternetExplorer
+Dim html As HTMLDocument
+Dim ElementCol As Object, Link As Object
+Dim ecol As Long
+
+Application.ScreenUpdating = False
+
+Set ie = New InternetExplorer
+ie.Visible = False
+
+ie.navigate "https://www.amazon.com/dp/b00f9tztq2/"
+
+Do While ie.readyState <> READYSTATE_COMPLETE
+Application.StatusBar = "Trying to go to website…"
+Loop
+
+Set html = ie.document
+
+Range("A1") = "extracted links"
+Set ElementCol = html.getElementsByTagName("img")
+
+For Each Link In ElementCol
+ecol = Worksheets("sheet1").Cells(1, Columns.Count).End(xlToLeft).Offset(0, 1).Column
+Cells(1, ecol).Value = Link.src
+Cells(1, ecol).Columns.AutoFit
+Next
+
+Set ie = Nothing
+Application.StatusBar = ""
+Application.ScreenUpdating = True
+
+
+End Sub
