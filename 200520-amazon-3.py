@@ -14,7 +14,7 @@ i = 1
 for url in url_csv:
     resp = requests.get(url, headers = headers)
     soup = resp.text
-    ama = re.findall('{"hiRes".*?",', soup)
+    ama = re.findall('{"hiRes":"h.*?",', soup)
     print("URL","(",i, "/", len(url_csv),")", url)
     img_dir = os.makedirs(r'C:/pyml-master/3/image/{0:04}'.format(i))
     
