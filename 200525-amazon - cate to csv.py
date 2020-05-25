@@ -13,7 +13,7 @@ with open("./yogi_listing2.csv") as f:
 
 f = open("yogi_cate.csv", "w")
 
-
+j = 1
 for url in url_csv:
     resp = requests.get(url, headers = headers)
     soup = BeautifulSoup(resp.text, features='lxml')
@@ -23,10 +23,7 @@ for url in url_csv:
         a=cate[i].get_text(" ", strip=True)
         cate_list.append(a)
     b=(" > ".join(cate_list))
-    print(b)
+    print("(", j ,"/",len(url_csv), ")", b)
     f.write(b + '\n')
+    j += 1
 f.close()
-   
-    
-
-
