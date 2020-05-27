@@ -1,5 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
 from selenium import webdriver
 import time
 
@@ -8,10 +6,10 @@ driver.get('https://eclogin.cafe24.com/Shop/')
 
 id = 'jwinnercode'
 pw = '780617bsl'
+
 time.sleep(1)
 driver.execute_script("document.getElementsByName('mall_id')[0].value=\'" + id + "\'")
 time.sleep(1)
 driver.execute_script("document.getElementsByName('userpasswd')[0].value=\'" + pw + "\'")
 time.sleep(1)
-#driver.find_element_by_xpath('//*[@id="tabAdmin"]/div/fieldset/p[1]/a').click()
 driver.find_element_by_class_name('btnSubmit').click()
