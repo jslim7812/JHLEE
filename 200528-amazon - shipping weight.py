@@ -20,10 +20,9 @@ for url in url_csv:
     resp = requests.get(url, headers = headers)
     soup = resp.text
     sweight = re.findall('Weight:</b> .*?s', soup)
-    b=str(sweight)
-    c=b[14:-2]
-    print("(", j ,"/",len(url_csv), ")", c)
-    f.write(c + '\n')
+    b=str(sweight)[14:-2]
+    print("(", j ,"/",len(url_csv), ")", b)
+    f.write(b + '\n')
     j += 1
 
 f.close()
