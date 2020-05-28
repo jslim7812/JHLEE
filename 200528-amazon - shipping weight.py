@@ -15,7 +15,6 @@ with open("./bieore100.csv") as f:
 
 f = open("shipping_weight.csv", "w")
 
-i=0
 j=1
 for url in url_csv:
     resp = requests.get(url, headers = headers)
@@ -25,7 +24,6 @@ for url in url_csv:
     c=b[14:-2]
     print("(", j ,"/",len(url_csv), ")", c)
     f.write(c + '\n')
-    i += 1
     j += 1
 
 f.close()
