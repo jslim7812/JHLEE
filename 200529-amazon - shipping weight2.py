@@ -10,10 +10,10 @@ headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit
 os.chdir(r'C:/pyml-master/3')
   
 
-with open("./yogi_listing.csv") as f:
+with open("./bieore100.csv") as f:
     url_csv= f.readlines()
 
-f = open("shipping_weight2.csv", "w")
+f = open("shipping_weight.csv", "w")
 
 j=1
 for url in url_csv:
