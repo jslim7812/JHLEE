@@ -10,10 +10,10 @@ headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit
 os.chdir(r'C:/pyml-master/3')
   
 
-with open("./bieore100.csv") as f:
+with open("./yogi_listing.csv") as f:
     url_csv= f.readlines()
 
-f = open("shipping_weight.csv", "w")
+f = open("shipping_weight2.csv", "w")
 
 j=1
 for url in url_csv:
@@ -26,6 +26,7 @@ for url in url_csv:
     if len(cate) == 0:
         a=str(sweight)[14:-2]
         print("(", j ,"/",len(url_csv), ")", a)
+        f.write(a + '\n')
 
     else :
         for i in range(0,len(cate)):
@@ -33,10 +34,9 @@ for url in url_csv:
             sweight2 = re.findall('Weight .*?s', b)
             c=str(sweight2)[9:-2]
             print("(", j ,"/",len(url_csv), ")", c)
+            f.write(c + '\n')
 
-    f.write(b + '\n')
+    
     j += 1
 
 f.close()
-
-
