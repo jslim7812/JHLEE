@@ -47,7 +47,7 @@ for i in range(1,page+1):
             file.write(r.content)
             file.close()
          
-with open(brandName+'.csv','w', encoding = 'utf-8', newline='') as f: 
+with open(brandName+'.csv','w', encoding = 'utf-8-sig', newline='') as f: 
     a = csv.writer(f) 
     for value in datalist: 
         a.writerow(value)
