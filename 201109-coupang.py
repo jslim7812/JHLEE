@@ -24,7 +24,10 @@ for i in range(1,page+1):
         b=url2[j].find("div", class_ ="name")
         c=url2[j].find("strong", class_ ="price-value")
         name=b.get_text(" ", strip=True)
-        price=c.get_text(" ", strip=True)
+        if c == None:
+            price = "None"
+        else:
+            price=c.get_text(" ", strip=True)
         url3= "https://www.coupang.com"+a
         data = []
         data.append(url3)
