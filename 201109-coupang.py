@@ -18,7 +18,7 @@ os.chdir('./'+brandName)
 
 datalist=[]
 for i in range(1,page+1):
-    url = "https://www.coupang.com/np/products/brand-shop?brandName="+brandName+"&page=1"#+str(i)
+    url = "https://www.coupang.com/np/products/brand-shop?brandName="+brandName+"&page="+str(i)
     resp = requests.get(url, headers = headers)
     soup = BeautifulSoup(resp.text, features='lxml')
     url2 = soup.find_all("a", class_ = "baby-product-link")
@@ -37,16 +37,15 @@ for i in range(1,page+1):
         
         resp2 = requests.get(url3, headers = headers)
         soup = resp2.text
-        cate = re.findall('parentsCategoryNames.*?"]', soup)
+        cate = re.findall('parentsCategoryNames":(.+?)"KAN"', soup)
         cate2 = "".join(cate)
-        cate3 = cate2[23:-14]
-        cate4 = re.findall('"(.+?)"', cate3)
-        cate4.reverse()
+        cate3 = re.findall('"(.+?)"', cate2)
+        cate3.reverse()
         coup = re.findall('parentsCategoryNames.*?hasBrandShop', soup, flags=re.IGNORECASE)
         coup2 = "".join(coup)
         coup3 = re.findall('"origin":".*?g"', coup2, flags=re.IGNORECASE)
-        print(str(s)+".", cate4)
-
+        
+        print(str(s)+".", cate3)
         print("[ "+name+" ]", "[ "+price+"원 ]")
 
         for k in range(len(coup3)):
@@ -60,7 +59,7 @@ for i in range(1,page+1):
             file.close()
         data = []
         data.append(url3)
-        data.append(cate4)
+        data.append(cate3)
         data.append(name)
         data.append(price)
         datalist.append(data)
