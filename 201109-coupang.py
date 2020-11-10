@@ -12,10 +12,13 @@ os.chdir(r'C:/pyml-master/coupang')
 brandName = '헤라' #검색어(브랜드네임) 지정
 page = 3 #페이지수 지정
 
+if not os.path.isdir(brandName):
+    os.mkdir(brandName)
+os.chdir('./'+brandName)
 
 datalist=[]
 for i in range(1,page+1):
-    url = "https://www.coupang.com/np/products/brand-shop?brandName="+brandName+"&page="+str(i)
+    url = "https://www.coupang.com/np/products/brand-shop?brandName="+brandName+"&page=1"#+str(i)
     resp = requests.get(url, headers = headers)
     soup = BeautifulSoup(resp.text, features='lxml')
     url2 = soup.find_all("a", class_ = "baby-product-link")
@@ -29,26 +32,38 @@ for i in range(1,page+1):
         else:
             price=c.get_text(" ", strip=True)
         url3= "https://www.coupang.com"+a
-        data = []
-        data.append(url3)
-        data.append(name)
-        data.append(price)
-        datalist.append(data)
+        
         s=(j+1)+60*(i-1)
-        print(str(s)+".", "[ "+url3+" ],", "[ "+name+" ],", "[ "+price+"원 ]")
+        
         resp2 = requests.get(url3, headers = headers)
         soup = resp2.text
+        cate = re.findall('parentsCategoryNames.*?"]', soup)
+        cate2 = "".join(cate)
+        cate3 = cate2[23:-14]
+        cate4 = re.findall('"(.+?)"', cate3)
+        cate4.reverse()
         coup = re.findall('parentsCategoryNames.*?hasBrandShop', soup, flags=re.IGNORECASE)
         coup2 = "".join(coup)
         coup3 = re.findall('"origin":".*?g"', coup2, flags=re.IGNORECASE)
+        print(str(s)+".", cate4)
+
+        print("[ "+name+" ]", "[ "+price+"원 ]")
+
         for k in range(len(coup3)):
             img = coup3[k][10:-1]
             img2 = "https:"+img
-            print(img2)
+            img3 = "{0:04}-".format(s)+"{0:04}.jpg".format(k+1)
+            print(img3)
             r = requests.get(img2)
-            file = open("{0:04}-".format(s)+"{0:04}.jpg".format(k+1),"wb")
+            file = open(img3,"wb")
             file.write(r.content)
             file.close()
+        data = []
+        data.append(url3)
+        data.append(cate4)
+        data.append(name)
+        data.append(price)
+        datalist.append(data)
          
 with open(brandName+'.csv','w', encoding = 'utf-8-sig', newline='') as f: 
     a = csv.writer(f) 
