@@ -1,0 +1,31 @@
+l1=1.75
+l2=4
+h=3
+s=h/((l1-l2)/2)
+g=0.25
+r=g/s
+w=((g**2)+(r**2))**(1/2)
+
+n1=1
+n2=6
+'''
+print(s)
+print(r)
+print(w)
+
+'''
+a=23.5987
+
+for i in range(n1,n2+1):
+    if i-n1 == 0:
+        c1 = 0
+        c2 = 0
+        c3 = 0
+        x = a + c1*l1 + c2*l2 + c3*w
+        print(i, x)
+    else:
+        c1 = int((i-n1)/2+0.5)
+        c2 = int((i-n1)/2)
+        c3 = i-n1
+        x = round(a + c1*l1 + c2*l2 + c3*w, 4)
+        print(i, x)
